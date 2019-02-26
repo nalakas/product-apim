@@ -75,8 +75,6 @@ public class TokenGenerate extends ScenarioTestBase {
             log.debug(TEST_APPLICATION_NAME + " is subscribed to " + TEST_API_1_NAME);
         }
         accessToken = generateAppKeys();
-
-        HttpResponse httpResponse=generateAccessTokenByImplicitGrantType();
     }
 
     @Test(description = "4.1.1.1")
@@ -182,16 +180,6 @@ public class TokenGenerate extends ScenarioTestBase {
         String requestBody;
         URL tokenEndpointURL = new URL(gatewayHttpsURL + "/token");
         requestBody = "grant_type=refresh_token&refresh_token=" + token;
-        response = apiStore.generateUserAccessKey(consumerKey, consumerSecret, requestBody, tokenEndpointURL);
-        return response;
-    }
-
-    public HttpResponse generateAccessTokenByImplicitGrantType() throws Exception {
-
-        HttpResponse response;
-        String requestBody;
-        URL tokenEndpointURL = new URL("https://localhost:8243/authorize");
-        requestBody = "scope=openid"+"&response_type=id_token"+"&redirect_uri=http://localhost:8080/playground2/oauth2client"+"&nonce=13e2312637dg136e1"+"&client_id=" + consumerKey;
         response = apiStore.generateUserAccessKey(consumerKey, consumerSecret, requestBody, tokenEndpointURL);
         return response;
     }
